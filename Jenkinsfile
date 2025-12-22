@@ -11,10 +11,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Building Docker Image"
-                sh 'docker build -t form-image:1.0 .'
+                bat 'docker build -t myimage .'
             }
         }
+
 
         stage('Test') {
             steps {
@@ -25,12 +25,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                echo "Deploying Docker Container"
-                sh '''
-                docker rm -f form-container || true
-                docker run -d -p 8080:80 --name form-container form-image:1.0
-                '''
+                bat 'docker run -d -p 8080:80 myimage'
             }
         }
+
     }
 }

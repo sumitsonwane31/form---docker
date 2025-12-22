@@ -20,12 +20,14 @@ pipeline {
     steps {
         // Linux: sh 'docker run --rm myimage curl http://localhost'
         bat 'docker run --rm myimage curl http://localhost'
-    }
-}
+            }
+        }
 
 stage('Deploy') {
     steps {
         // Linux: sh 'docker run -d -p 8080:80 myimage'
         bat 'docker run -d -p 8080:80 myimage'
-    }
+            }
+        }
+    }    
 }

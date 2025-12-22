@@ -17,17 +17,15 @@ pipeline {
 
 
         stage('Test') {
-            steps {
-                echo "Testing Docker Image"
-                sh 'docker images | grep form-image'
-            }
-        }
+    steps {
+        // Linux: sh 'docker run --rm myimage curl http://localhost'
+        bat 'docker run --rm myimage curl http://localhost'
+    }
+}
 
-        stage('Deploy') {
-            steps {
-                bat 'docker run -d -p 8080:80 myimage'
-            }
-        }
-
+stage('Deploy') {
+    steps {
+        // Linux: sh 'docker run -d -p 8080:80 myimage'
+        bat 'docker run -d -p 8080:80 myimage'
     }
 }

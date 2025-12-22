@@ -5,8 +5,7 @@ pipeline {
 
         stage('Check-In') {
             steps {
-                echo "Code successfully checked-in from GitHub"
-                git 'https://github.com/sumitsonwane31/form---docker.git'
+                echo "Code checked-in from GitHub (SCM Checkout successful)"
             }
         }
 
@@ -20,9 +19,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing Docker Image"
-                sh '''
-                docker images | grep form-image
-                '''
+                sh 'docker images | grep form-image'
             }
         }
 

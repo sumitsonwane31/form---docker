@@ -29,5 +29,5 @@ stage('Deploy') {
         bat 'docker run -d -p 8080:80 myimage'
             }
         }
-    }    
-}
+    }
+}    

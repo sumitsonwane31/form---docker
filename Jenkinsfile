@@ -15,22 +15,22 @@ pipeline {
             }
         }
 
-
         stage('Test') {
-    steps {
-        bat 'docker run -d --name test-container -p 8081:80 myimage'
-        bat 'timeout /t 5'
-        bat 'curl http://localhost:8081'
-        bat 'docker stop test-container'
-        bat 'docker rm test-container'
+            steps {
+                bat 'docker run -d --name test-container -p 8081:80 myimage'
+                bat 'timeout /t 5'
+                bat 'curl http://localhost:8081'
+                bat 'docker stop test-container'
+                bat 'docker rm test-container'
             }
         }
 
-stage('Deploy') {
-    steps {
-        // Linux: sh 'docker run -d -p 8080:80 myimage'
-        bat 'docker run -d -p 8080:80 myimage'
+        stage('Deploy') {
+            steps {
+                bat 'docker stop mycontainer || exit 0'
+                bat 'docker rm mycontainer || exit 0'
+                bat 'docker run -d --name mycontainer -p 8082:80 myimage'
             }
         }
     }
-}    
+}

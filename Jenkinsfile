@@ -18,7 +18,7 @@ pipeline {
         stage('Test') {
             steps {
                 bat 'docker run -d --name test-container -p 8081:80 myimage'
-                bat 'timeout /t 5'
+                powershell 'Start-Sleep -Seconds 5'
                 bat 'curl http://localhost:8081'
                 bat 'docker stop test-container'
                 bat 'docker rm test-container'

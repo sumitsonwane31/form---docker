@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        KUBECONFIG = 'C:\\ProgramData\\Jenkins\\.kube\\config'
+    }
+
     stages {
 
         stage('Check-In') {
@@ -27,6 +31,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                bat 'kubectl config current-context'
+                bat 'kubectl get nodes'
                 bat 'kubectl apply --validate=false -f k8s/deployment.yaml'
                 bat 'kubectl apply --validate=false -f k8s/service.yaml'
                 bat 'kubectl rollout status deployment/form-app'

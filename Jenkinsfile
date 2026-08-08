@@ -16,7 +16,7 @@ pipeline {
         }
 
         stage('Test') {
-<<<<<<< HEAD
+
             steps {
                 bat 'docker run -d --name test-container -p 8081:80 myimage'
                 powershell 'Start-Sleep -Seconds 5'
@@ -32,7 +32,7 @@ pipeline {
                 bat 'docker rm mycontainer || exit 0'
                 bat 'docker run -d --name mycontainer -p 8082:80 myimage'
             }
-=======
+
     steps {
         bat 'docker run -d --name test-container -p 8081:80 myimage:latest'
         powershell 'Start-Sleep -Seconds 5'
@@ -48,7 +48,6 @@ stage('Deploy') {
         bat 'kubectl apply -f k8s/service.yaml'
         bat 'kubectl rollout status deployment/form-app'
     	   }
->>>>>>> b75970c (Add Kubernetes deployment and CI/CD updates)
         }
     }
 }

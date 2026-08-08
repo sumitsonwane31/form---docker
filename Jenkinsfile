@@ -18,8 +18,11 @@ pipeline {
 
         stage('Test') {
     steps {
-        // Linux: sh 'docker run --rm myimage curl http://localhost'
-        bat 'docker run --rm myimage curl http://localhost'
+        bat 'docker run -d --name test-container -p 8081:80 myimage'
+        bat 'timeout /t 5'
+        bat 'curl http://localhost:8081'
+        bat 'docker stop test-container'
+        bat 'docker rm test-container'
             }
         }
 
